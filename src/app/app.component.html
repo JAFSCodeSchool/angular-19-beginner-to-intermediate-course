@@ -14,8 +14,13 @@
     <nav class="w-3xs min-w-3xs sticky top-16 h-[calc(100vh-4rem)] bg-emerald-600 text-emerald-50 py-5">
         <app-side-bar></app-side-bar>
     </nav>
-    <main [class]="classNames+' text-green-700'" id="">
-        Name <input type="text" class="border" [(ngModel)]="name">
-        {{name}}
+    <main class="p-5">
+        <app-heading [user]="user" heading="Heading" 
+         (success)="onSuccess($event)"
+         (failure)="onFailure($event)"
+         ></app-heading>
+        <p class="mt-12 text-2xl">
+            From Parent - {{user.name}}
+        </p>
     </main>
 </section>

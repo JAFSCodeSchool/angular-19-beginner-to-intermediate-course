@@ -1,0 +1,4 @@
+<h1>{{title}}</h1>
+{{user?.name}}
+<button class="border px-3 py-1 rounded-md" (click)="onSubmit()">Submit</button>
+<button class="border px-3 py-1 rounded-md" (click)="failure.emit({ error: 'Some Error' })">Error</button>

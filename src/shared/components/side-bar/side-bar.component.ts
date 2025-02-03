@@ -5,8 +5,6 @@ import { SideBarItemComponent } from './side-bar-item/side-bar-item.component';
   selector: 'app-side-bar',
   imports: [SideBarItemComponent],
   templateUrl: './side-bar.component.html',
-  styleUrl: './side-bar.component.css'
+  styleUrl: './side-bar.component.css',
 })
-export class SideBarComponent {
-
-}
+export class SideBarComponent {}
