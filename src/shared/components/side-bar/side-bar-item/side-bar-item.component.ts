@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-side-bar-item',
@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrl: './side-bar-item.component.css'
 })
 export class SideBarItemComponent {
-
+  @Input() menuDetails!: { name: string, path: string };
 }
