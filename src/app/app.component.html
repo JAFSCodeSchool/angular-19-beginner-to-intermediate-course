@@ -15,12 +15,6 @@
         <app-side-bar></app-side-bar>
     </nav>
     <main class="p-5">
-        <app-heading [user]="user" heading="Heading" 
-         (success)="onSuccess($event)"
-         (failure)="onFailure($event)"
-         ></app-heading>
-        <p class="mt-12 text-2xl">
-            From Parent - {{user.name}}
-        </p>
+        <router-outlet></router-outlet>
     </main>
 </section>

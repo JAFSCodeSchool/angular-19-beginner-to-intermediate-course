@@ -8,9 +8,5 @@ import { SideBarItemComponent } from './side-bar-item/side-bar-item.component';
   styleUrl: './side-bar.component.css',
 })
 export class SideBarComponent {
-  routes = [
-    { name: 'Home', path: '/' },
-    { name: 'Notes', path: '/notes' },
-    { name: 'Trash', path: '/trash' },
-  ];
+  
 }
