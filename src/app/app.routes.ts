@@ -4,6 +4,7 @@ import { NotesComponent } from './notes/notes.component';
 import { TrashComponent } from './trash/trash.component';
 import { InvalidComponent } from './invalid/invalid.component';
 import { NoteComponent } from './notes/note/note.component';
+import { TestComponent } from '../learning/test/test.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -16,6 +17,6 @@ export const routes: Routes = [
   },
 
   { path: 'trash', component: TrashComponent },
+  { path: 'test', component:TestComponent  },
   { path: '**', component: InvalidComponent },
-  { path: 'test', redirectTo: 'notes', pathMatch: 'full' },
 ];

@@ -1,0 +1,69 @@
+<!-- @if(getKids(); as kids){
+    @if(kids.length>0){
+        <div class="bg-green-200 p-5 rounded-4xl">
+        <h1>Kids Details</h1>
+        <p>{{kids[0].name}}</p>
+        <p>{{kids[1].name}}</p>
+    </div>
+    } @else {
+        No Kids Found
+    }
+} @else if (getElders(); as elders) {
+    @if(elders.length>0){
+        <div class="bg-green-200 p-5 rounded-4xl">
+            <h1>Elders Details</h1>
+            <p>{{elders[0].name}}</p>
+            <p>{{elders[1].name}}</p>
+        </div>
+    }
+} -->
+
+
+@switch (type) {
+    @case ('KIDS') {
+        @if(getKids(); as kids){
+            @if(kids.length>0){
+                <div class="bg-green-200 p-5 rounded-4xl">
+                <h1>Kids Details</h1>
+                @for (kid of kids; track $index) {
+                    <p>{{kid.name}} ({{kid.age}})</p>
+                }
+            </div>
+            } @else {
+                No Kids Found
+            }
+        }
+    }
+
+    @case ('ELDERS') {
+        @if (getElders(); as elders) {
+            @if(elders.length>0){
+                <div class="bg-green-200 p-5 rounded-4xl">
+                    <h1>Elders Details</h1>
+                    @for (elder of elders; track $index) {
+                    <p>{{elder.name}} ({{elder.age}})</p>
+                }
+                </div>
+            }
+        }
+    }
+
+    @default {
+        No Details Found
+    }
+}
+
+<!-- @for (member of family; track $index) {
+    @if($even){
+        <div class="{{$even?'bg-green-200':'bg-red-200'}} rounded-3xl mt-5 p-5">
+        <p>{{member.name}}</p>
+        Index: {{$index}}
+        Count: {{$count}}
+        First: {{$first}}
+        Last: {{$last}}
+        Even: {{$even}}
+        Odd: {{$odd}}
+        <p>---</p>
+    </div>
+    }
+} -->
