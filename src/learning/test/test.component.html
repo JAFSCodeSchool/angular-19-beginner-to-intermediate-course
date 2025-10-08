@@ -1,3 +1,7 @@
+{{name()}}
+{{age()}}
+{{isMajor()}}
+
 <!-- @if(getKids(); as kids){
     @if(kids.length>0){
         <div class="bg-green-200 p-5 rounded-4xl">
@@ -19,7 +23,7 @@
 } -->
 
 
-@switch (type) {
+<!-- @switch (type) {
     @case ('KIDS') {
         @if(getKids(); as kids){
             @if(kids.length>0){
@@ -51,7 +55,7 @@
     @default {
         No Details Found
     }
-}
+} -->
 
 <!-- @for (member of family; track $index) {
     @if($even){
