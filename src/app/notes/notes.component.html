@@ -1,6 +1,9 @@
-<section class="border-2 border-red-500">
-    <p>notes works!</p>
-<div class="border-2 border-green-500">
-    <router-outlet></router-outlet>
-</div>
+<section class="p-3 rounded-2xl bg-gray-100 text-2xl font-semibold">
+    <h2>My Notes ({{this.notes.length}})</h2>
+    <p>{{this.notes() | json}}</p>
 </section>
+<div class="grid grid-cols-3 gap-5">
+    @for (note of notes(); track $index) {
+        <app-note [note]="note" [sno]="$index"></app-note>
+    }
+</div>

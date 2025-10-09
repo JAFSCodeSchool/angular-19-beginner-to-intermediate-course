@@ -1,1 +1,7 @@
-<p>note works!</p>
+<div class="bg-red-100 rounded-2xl p-3">
+<p>{{index()}}</p>
+@if (note(); as note) {
+    <h2>{{note.title}}</h2>
+<p>{{note.details}}</p>
+}
+</div>
