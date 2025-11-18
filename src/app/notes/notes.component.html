@@ -1,9 +1,18 @@
-<section class="p-3 rounded-2xl bg-gray-100 text-2xl font-semibold">
-    <h2>My Notes ({{this.notes.length}})</h2>
-    <p>{{this.notes() | json}}</p>
-</section>
-<div class="grid grid-cols-3 gap-5">
-    @for (note of notes(); track $index) {
-        <app-note [note]="note" [sno]="$index"></app-note>
+<form #detailsForm="ngForm" (ngSubmit)="submit(detailsForm)">
+    <input required name="name" type="text" class="border rounded-md p-2" [(ngModel)]="details.name" #userName="ngModel">
+    @if(userName.dirty && !userName.valid){
+        <p>Its Required</p>
     }
-</div>
+    <div ngModelGroup="moreDetails">
+        <input #userAge="ngModel" min="18" name="age" type="number" class="border rounded-md p-2" [(ngModel)]="details.age">
+        @if(userAge.dirty && !userAge.valid){
+        <p>Must be greater than 18</p>
+    }
+        <select name="gender" class="border rounded-md p-2" [(ngModel)]="details.gender">
+            <option value="">-Choose One-</option>
+            <option value="m">Male</option>
+            <option value="f">Female</option>
+        </select>
+    </div>
+    <button type="submit" [disabled]="!detailsForm.valid" class="border rounded-md p-2 bg-red-500 text-white disabled:opacity-10">Submit</button>
+</form>
