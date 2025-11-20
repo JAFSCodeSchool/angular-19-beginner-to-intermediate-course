@@ -1,18 +1,65 @@
-<form #detailsForm="ngForm" (ngSubmit)="submit(detailsForm)">
-    <input required name="name" type="text" class="border rounded-md p-2" [(ngModel)]="details.name" #userName="ngModel">
-    @if(userName.dirty && !userName.valid){
-        <p>Its Required</p>
-    }
-    <div ngModelGroup="moreDetails">
-        <input #userAge="ngModel" min="18" name="age" type="number" class="border rounded-md p-2" [(ngModel)]="details.age">
-        @if(userAge.dirty && !userAge.valid){
-        <p>Must be greater than 18</p>
-    }
-        <select name="gender" class="border rounded-md p-2" [(ngModel)]="details.gender">
-            <option value="">-Choose One-</option>
-            <option value="m">Male</option>
-            <option value="f">Female</option>
-        </select>
+<section [formGroup]="userDetails">
+    <div>
+    <label for="name" class="block">Name</label>
+    <input name="name" type="text" formControlName="name" class="border p-3">
+    @let name = userDetails.controls.name;
+    @if(name.errors && name.dirty){
+        <div class="text-red-500">
+        @if(name.errors['required']){
+            <p>Name is required</p>
+        }
+        @if(name.errors['minlength']){
+        <p>Name should have min 3 char</p>
+        }
+        @if(name.errors['maxlength']){
+        <p>Name cannot have more than 60 char</p>
+        }
     </div>
-    <button type="submit" [disabled]="!detailsForm.valid" class="border rounded-md p-2 bg-red-500 text-white disabled:opacity-10">Submit</button>
-</form>
+    }
+</div>
+<div>
+    <label for="age" class="block">Age</label>
+    <input name="age" type="number" [formControl]="userDetails.controls.age" class="border p-3">
+    @let age = userDetails.controls.age;
+    @if(age.errors && age.dirty){
+        <div class="text-red-500">
+        @if(age.errors['required']){
+            <p>Age is required</p>
+        }
+        @if(age.errors['min']){
+        <p>Min age is 18</p>
+        }
+        @if(age.errors['max']){
+        <p>Max age allowed is 100</p>
+        }
+    </div>
+    }
+</div>
+<div formGroupName="address">
+<div>
+    <label for="city" class="block">City</label>
+    <input name="city" type="text" [formControl]="userDetails.controls.address.controls.city" class="border p-3">
+    @let city = userDetails.controls.address.controls.city;
+    @if(city.errors && city.dirty){
+        <div class="text-red-500">
+        @if(city.errors['required']){
+            <p>City is required</p>
+        }
+    </div>
+    }
+</div>
+</div>
+</section>
+<button (click)="submit()" [disabled]="!userDetails.valid" class="border p-2">Submit</button>
+
+<p>Value:{{userDetails.value | json}}</p>
+<p>Valid:{{userDetails.valid}}</p>
+<p>Dirty:{{userDetails.dirty}}</p>
+<p>Touched:{{userDetails.touched}}</p>
+<p>Untouched:{{userDetails.untouched}}</p>
+<p>Status:{{userDetails.status}}</p>
+<!-- <p>DefaultValue:{{age.defaultValue}}</p> -->
+<p>Enabled:{{userDetails.enabled}}</p>
+<p>Disabled:{{userDetails.disabled}}</p>
+<p>Errors:{{userDetails.controls.name.errors | json}}</p>
+<p>Errors:{{userDetails.controls.age.errors | json}}</p>

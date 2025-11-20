@@ -1,32 +1,35 @@
-import { AfterViewInit, Component, OnInit, signal, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from "@angular/router";
 import { NoteComponent } from './note/note.component';
-import { Note } from '../../shared/models/note.model';
 import { JsonPipe } from '@angular/common';
-import { Form, FormsModule, NgForm } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-notes',
-  imports: [RouterOutlet, NoteComponent, JsonPipe, FormsModule],
+  imports: [RouterOutlet, NoteComponent, JsonPipe, FormsModule, ReactiveFormsModule],
   templateUrl: './notes.component.html',
   styleUrl: './notes.component.css'
 })
-export class NotesComponent implements AfterViewInit {
+export class NotesComponent {
 
-  @ViewChild('detailsForm') detailsForm: NgForm | undefined = undefined;
+  userDetails = new FormGroup({
+    name: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(60)]),
+    age: new FormControl(null, [Validators.required, Validators.min(18), Validators.max(100)]),
+    address: new FormGroup({
+      line1: new FormControl(),
+      line2: new FormControl(),
+      city: new FormControl(null, Validators.required),
+    })
+  })
 
-  details = {
-    name: '',
-    age: 0,
-    gender: 'm'
-  };
 
-  ngAfterViewInit(): void {
-    
-  }
 
-  submit(form: NgForm) {
-    console.log(form.value)
-    form.reset();
+  submit() {
+    if(this.userDetails.valid)
+    {
+      console.log(this.userDetails.value)
+    }else{
+      console.log('error')
+    }
   }
 }
