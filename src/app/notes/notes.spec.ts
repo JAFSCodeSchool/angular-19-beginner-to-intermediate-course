@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InvalidComponent } from './invalid.component';
+import { Notes } from './notes';
 
-describe('InvalidComponent', () => {
-  let component: InvalidComponent;
-  let fixture: ComponentFixture<InvalidComponent>;
+describe('Notes', () => {
+  let component: Notes;
+  let fixture: ComponentFixture<Notes>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [InvalidComponent]
+      imports: [Notes]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(InvalidComponent);
+    fixture = TestBed.createComponent(Notes);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

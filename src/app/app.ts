@@ -2,22 +2,22 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { SideBarComponent } from '../shared/components/side-bar/side-bar.component';
 import { FormsModule } from '@angular/forms';
-import { User } from '../shared/models/user.model';
+import { UserDto } from '../shared/models/user-dto.model';
 
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, SideBarComponent, FormsModule],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+  templateUrl: './app.html',
+  styleUrl: './app.css',
 })
-export class AppComponent {
-  user: User = {
+export class App {
+  user: UserDto = {
     name: 'Franklin',
     gender: 'm',
     age: 12,
   };
 
-  onSuccess($e: User) {
+  onSuccess($e: UserDto) {
     this.user = $e;
   }
 
