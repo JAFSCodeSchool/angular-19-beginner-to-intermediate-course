@@ -49,6 +49,17 @@
     }
 </div>
 </div>
+<div formArrayName="skills">
+    <label for="skill">Skill</label>
+@for (item of skills.controls;let i = $index; track item) {
+    <div [formGroupName]="i">
+        <input type="text" class="border p-3" formControlName="skill"> 
+        <input type="number" class="border p-3" formControlName="experience"> 
+        <button (click)="addSkill()" class="ml-2 p-3 border">+</button>
+        <button (click)="removeSkill(i)" class="ml-2 p-3 border">-</button>
+    </div>
+}
+</div>
 </section>
 <button (click)="submit()" [disabled]="!userDetails.valid" class="border p-2">Submit</button>
 

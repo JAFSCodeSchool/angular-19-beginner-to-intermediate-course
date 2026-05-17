@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from "@angular/router";
 import { Note } from './note/note';
 import { JsonPipe } from '@angular/common';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-notes',
@@ -19,10 +19,26 @@ export class Notes {
       line1: new FormControl(),
       line2: new FormControl(),
       city: new FormControl(null, Validators.required),
-    })
+    }),
+    skills: new FormArray([this.createSkill()])
   })
 
+  get skills():FormArray{
+    return this.userDetails.get('skills') as FormArray;
+  }
 
+  addSkill(){
+    this.skills.push(this.createSkill())
+  }
+
+  createSkill(){
+    return new FormGroup({skill:new FormControl(null),experience:new FormControl(null)});
+  }
+
+  removeSkill(index:number){
+    if(this.skills.length<=1) return;
+    this.skills.removeAt(index)
+  }
 
   submit() {
     if(this.userDetails.valid)
