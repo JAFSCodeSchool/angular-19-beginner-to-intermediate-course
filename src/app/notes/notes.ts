@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from "@angular/router";
 import { Note } from './note/note';
 import { JsonPipe } from '@angular/common';
-import { FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-notes',
@@ -12,15 +12,17 @@ import { FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Va
 })
 export class Notes {
 
-  userDetails = new FormGroup({
-    name: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(60)]),
-    age: new FormControl(null, [Validators.required, Validators.min(18), Validators.max(100)]),
-    address: new FormGroup({
-      line1: new FormControl(),
-      line2: new FormControl(),
-      city: new FormControl(null, Validators.required),
+  fb = inject(FormBuilder)
+
+  userDetails = this.fb.group({
+    name: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(60)]],
+    age: [null, [Validators.required, Validators.min(18), Validators.max(100)]],
+    address: this.fb.group({
+      line1: null,
+      line2: null,
+      city: [null, Validators.required],
     }),
-    skills: new FormArray([this.createSkill()])
+    skills: this.fb.array([this.createSkill()])
   })
 
   get skills():FormArray{
@@ -32,7 +34,7 @@ export class Notes {
   }
 
   createSkill(){
-    return new FormGroup({skill:new FormControl(null),experience:new FormControl(null)});
+    return this.fb.group({skill:null,experience:null});
   }
 
   removeSkill(index:number){
